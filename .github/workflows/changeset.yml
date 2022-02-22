@@ -18,7 +18,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const result = github.rest.pulls.create({
+            const result = await github.rest.pulls.create({
               title: '[Example] Simple demo',
               owner: context.repo.owner,
               repo: context.repo.repo,
