@@ -16,4 +16,6 @@ jobs:
     - name: Open PR
       uses: actions/github-script@v6
       with:
-        script: console.log('test')
+        script: |
+          console.log('Owner: ', context.repo.owner);
+          console.log('Repo: ', context.repo.repo);
