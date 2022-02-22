@@ -22,8 +22,9 @@ jobs:
             });
 
             const isPullRequestOpen = list.data.length > 0;
-
-            if (!isPullRequestOpen) {
+            if (isPullRequestOpen) {
+              console.log('Pull request is already open! ', list.data[0].html_url);
+            } else {
               const pull = await github.rest.pulls.create({
                 title: 'Merging `${{ github.ref_name }}` to `alpha`',
                 owner,
@@ -38,9 +39,7 @@ jobs:
                   ' - [ ] Merge this PR'
                 ].join('\n')
               });
-              console.log('Pull request opened! ', pull.html_url);
-            } else {
-              console.log('Pull request is already open! ', list.data[0].html_url);
+              console.log('Pull request opened! ', pull.data.html_url);
             }
 
 
