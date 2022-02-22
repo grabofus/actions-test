@@ -36,9 +36,9 @@ jobs:
                   'Can you please resolve the conflict and merge this PR?'
                 ].join('\n')
               });
-              console.log('pull opened', pull);
+              console.log('Pull request opened! ', pull.html_url);
             } else {
-              console.log('pull open already', list.data[0]);
+              console.log('Pull request is already open! ', list.data[0].html_url);
             }
 
 
