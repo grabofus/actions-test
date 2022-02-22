@@ -1,0 +1,19 @@
+name: Changeset Testing
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Name of the PR'
+        required: true
+
+jobs:
+  test:
+    name: Test Job
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Open PR
+      uses: actions/github-script@v6
+      with:
+        script: console.log('test')
