@@ -20,6 +20,7 @@ jobs:
           console.log('Owner: ', context.repo.owner);
           console.log('Repo: ', context.repo.repo);
           github.rest.pulls.create({
+            title: 'Merge main to alpha',
             owner: context.repo.owner,
             repo: context.repo.repo,
             head: 'main',
