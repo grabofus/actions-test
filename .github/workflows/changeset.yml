@@ -10,16 +10,29 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const { repo, owner } = context.repo;
+            const { owner, repo } = context.repo; 
+            const head = '${{ github.ref_name }}';
+            const base = 'alpha';
+
+            const list = await github.rest.pulls.list({
+              owner,
+              repo,
+              head,
+              base
+            });
+
+            console.log('list', list);
+
             github.rest.pulls.create({
-              title: 'Merging `master` to `alpha`',
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              head: '${{ github.ref }}',
-              base: 'develop',
+              title: 'Merging `${{ github.ref_name }}` to `alpha`',
+              owner,
+              repo,
+              head,
+              base,
               body: [
                 '## Description',
                 'There has been a conflict while trying to merge `master` to `alpha` branch.',
                 'Can you please resolve the conflict and merge this PR?'
               ].join('\n')
             });
+
