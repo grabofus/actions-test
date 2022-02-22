@@ -33,8 +33,8 @@ jobs:
                 body: [
                   '## Description',
                   'There has been a conflict while trying to merge `master` to `alpha` branch.',
-                  '## To do'
-                  ' - [ ] Resolve conflict'
+                  '## To do',
+                  ' - [ ] Resolve conflict',
                   ' - [ ] Merge this PR'
                 ].join('\n')
               });
