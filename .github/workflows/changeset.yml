@@ -33,7 +33,9 @@ jobs:
                 body: [
                   '## Description',
                   'There has been a conflict while trying to merge `master` to `alpha` branch.',
-                  'Can you please resolve the conflict and merge this PR?'
+                  '## To do'
+                  ' - [ ] Resolve conflict'
+                  ' - [ ] Merge this PR'
                 ].join('\n')
               });
               console.log('Pull request opened! ', pull.html_url);
