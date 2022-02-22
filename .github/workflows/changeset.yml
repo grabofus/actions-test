@@ -19,3 +19,9 @@ jobs:
         script: |
           console.log('Owner: ', context.repo.owner);
           console.log('Repo: ', context.repo.repo);
+          github.rest.pulls.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            head: 'main',
+            base: 'alpha',
+          });
