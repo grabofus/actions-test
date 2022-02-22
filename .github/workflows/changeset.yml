@@ -20,6 +20,6 @@ jobs:
               body: [
                 '## Description',
                 'There has been a conflict while trying to merge `master` to `alpha` branch.',
-                'Can you please resolve the conflict and merge this PR?,
+                'Can you please resolve the conflict and merge this PR?'
               ].join('\n')
             });
