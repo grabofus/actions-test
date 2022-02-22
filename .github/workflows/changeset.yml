@@ -1,21 +1,45 @@
-name: Changeset Testing
-
+name: Pull Request Action
 on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: 'Name of the PR'
-        required: true
-
+  workflow_dispatch
+      
 jobs:
-  test:
-    name: Test Job
+  create-pull-request:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Open PR
-      uses: actions/github-script@v6
-      with:
-        script: |
-          console.log('Owner: ', context.repo.owner);
-          console.log('Repo: ', context.repo.repo);
+      - name: Merge branch to alpha
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { owner, repo } = context.repo; 
+            const head = '${{ github.ref_name }}';
+            const base = 'alpha';
+
+            const list = await github.rest.pulls.list({
+              owner,
+              repo,
+              head,
+              base
+            });
+
+            const isPullRequestOpen = list.data.length > 0;
+            if (isPullRequestOpen) {
+              console.log('Pull request is already open! ', list.data[0].html_url);
+            } else {
+              const pull = await github.rest.pulls.create({
+                title: 'Merging `${{ github.ref_name }}` to `alpha`',
+                owner,
+                repo,
+                head,
+                base,
+                body: [
+                  '## Description',
+                  'There has been a conflict while trying to merge `master` to `alpha` branch.',
+                  '## To do',
+                  ' - [ ] Resolve conflict',
+                  ' - [ ] Merge this PR'
+                ].join('\n')
+              });
+              console.log('Pull request opened! ', pull.data.html_url);
+            }
+
+
